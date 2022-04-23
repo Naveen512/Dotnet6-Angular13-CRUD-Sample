@@ -1,0 +1,118 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col col-md-4 offset-md-4">
+      <button type="button" (click)='openAddOrUpdateModal(0)' class="btn btn-primary">Add</button>
+    </div>
+  </div>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sd of students">
+      <th scope="row">{{ sd.id }}</th>
+      <td>{{ sd.name }}</td>
+      <td>{{ sd.age }}</td>
+      <td>{{ sd.gender }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="openAddOrUpdateModal(sd.id)">Edit</button> |
+        <button class="btn btn-primary" (click)="openDeleteModal(sd.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="addorupdatemodal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{addorupdatemodalTitle}}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <input type="hidden" id="studentId" [(ngModel)]="studentForm.id">
+            <div class="mb-3">
+              <label for="name" class="form-label"
+                >Name</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                [(ngModel)]="studentForm.name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="age" class="form-label"
+                >Age</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="age"
+                [(ngModel)] = "studentForm.age"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="age" class="form-label"
+                >Gender</label
+              >
+              <select class="form-select" [(ngModel)] = "studentForm.gender" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" (click)="createorUpdateStudent()" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h1>Delete Confiramtion </h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="confirmDelete()" class="btn btn-primary">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
